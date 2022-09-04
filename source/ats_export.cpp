@@ -31,6 +31,9 @@ public:
             auto rt = function_map.find(first_token);
             if(rt == function_map.end()) {
                 interp::inputText(v, input_line);
+                if(stream.str().length() == 0) {
+                    return "OK ...";
+                }
                 return stream.str();
             }
 

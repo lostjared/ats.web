@@ -13,4 +13,4 @@ all: $(OBJ_FILES)
 	$(CXX) $(OBJ_FILES)  -o $(OUTPUT_NAME)  $(LDFLAGS)
 
 clean:
-	rm -f $(OUTPUT_NAME) *.o 
+	rm -f *.o 
