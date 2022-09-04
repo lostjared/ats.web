@@ -8,7 +8,6 @@ var Module = {
 
 var input = document.getElementById("text1");
 input.addEventListener("keypress", function(event) {
-
     if (event.key === "Enter") {
         event.preventDefault();
         Lex();
