@@ -220,15 +220,19 @@ namespace interp {
     }
     
     void Code::step() {
+
+
         if(instruct.size()==0) return;
-        if(proc.ip >= 0) {
-            procInstruct(instruct[proc.ip]);
-            ++proc.ip;
-            if(proc.ip >= instruct.size()) {
-                stream << "Program finished executing..<br>";
-                run = false;
-                proc.ip = 0;
+        if(proc.ip >= 0 && proc.ip < instruct.size()) {
+            if(instruct[proc.ip].opcode == opc::END)
+                procInstruct(instruct[proc.ip]);
+            else {
+                procInstruct(instruct[proc.ip++]);
             }
+        } else {
+            stream << "Program finished executing..<br>";
+            run = false;
+            proc.ip = 0;
         }
     }
     

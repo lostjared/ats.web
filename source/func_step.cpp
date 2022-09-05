@@ -7,7 +7,6 @@ namespace token {
             stream << "Error: You must run build first.<br>";
             return;
         }
-        
         code.printCurrent();
         code.step();
         stream << "Registers: <br>";
