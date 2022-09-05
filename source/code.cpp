@@ -220,8 +220,6 @@ namespace interp {
     }
     
     void Code::step() {
-
-
         if(instruct.size()==0) return;
         if(proc.ip >= 0 && proc.ip < instruct.size()) {
             if(instruct[proc.ip].opcode == opc::END)
