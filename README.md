@@ -1,5 +1,5 @@
 
-# Fantasy 8-bit Assembly Language Interpreter
+# ATS: Fantasy 8-bit Assembly Language Interpreter
 
 This project is an interpreter for a fantasy 8-bit Assembly language roughly based off the 6502 instruction set. It adds new functionality and features to allow old code to be used on modern computers. Emulation of original hardware is not the goal of this project. This is a WebAssembly port of the original C++ project.
 
