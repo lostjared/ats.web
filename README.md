@@ -123,16 +123,21 @@ s- BEQ - Branch on result Zero
 ### Building
 
 ```sh
-mkdir build
-cd build
-cmake ..
-make
+cd source
+make -j8
 ```
 
 ### Running
 
 To start the interpreter visit http://lostsidedead.biz/ats
+or open a web server with python use
 
+```sh
+python -m http.server 3000
+```
+
+then point your web browser to 
+localhost:3000
 
 Use the `help` command within the shell to get a list of all available commands.
 
