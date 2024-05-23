@@ -28,25 +28,25 @@ namespace lex {
                 bool ohex = code.symbols["hex"].get_double()!=0;
                 if(ohex == false) {
                     if(v_assign != "")
-                    	stream << "expr: [" << v_assign << "] = " << e << "<br>";
+                    	stream << "expr: [" << v_assign << "] = " << e << "\r\n";
                     else
-                        stream << "expr: " << e << "<br>";
+                        stream << "expr: " << e << "\r\n";
                 }
                 else
                     if(v_assign != "")
-                    	stream << "expr: [" << v_assign << "] = $" << std::uppercase << std::hex << static_cast<int>(e) << "<br>";
+                    	stream << "expr: [" << v_assign << "] = $" << std::uppercase << std::hex << static_cast<int>(e) << "\r\n";
                 	else
-                        stream << "expr: $" << std::uppercase << std::hex << static_cast<int>(e) << "<br>";
+                        stream << "expr: $" << std::uppercase << std::hex << static_cast<int>(e) << "\r\n";
                 
                 if(input.GetCurrent().getToken() == ";")
                     continue;// eat token
             }
         }
         catch (Scanner_EOF) {
-            stream << "end of evalulation.<br>";
+            stream << "end of evalulation.\r\n";
         }
         catch(Scanner_Error) {
-            stream << " A error has occoured.<br>";
+            stream << " A error has occoured.\r\n";
         }
         return false;
     }
@@ -85,7 +85,7 @@ namespace lex {
                         if(function[var_name].func != 0)
                             return function[var_name].func(d);
                         
-                        err("Error function not found.<br>");
+                        err("Error function not found.\r\n");
                     } else err("Unknown function");
                 }
                 
@@ -186,8 +186,8 @@ namespace lex {
                 {
                     std::string temp=input.GetCurrent().getToken();
                     
-                    if(temp == "++") err("No ++ right now<br>");
-                    if(temp == "--") err("No -- right now<br>");
+                    if(temp == "++") err("No ++ right now\r\n");
+                    if(temp == "--") err("No -- right now\r\n");
                     
                     switch(temp[0]) {
                         case '+':

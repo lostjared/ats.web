@@ -7,7 +7,7 @@ namespace interp {
         file.open(text, std::ios::out);
         if(!file.is_open()) return false;
         for(unsigned int i = 0; i < lines.size(); ++i) {
-            file << lines[i].index << " " << lines[i].text << "<br>";
+            file << lines[i].index << " " << lines[i].text << "\r\n";
         }
         file.close();
         return true;
@@ -72,7 +72,7 @@ namespace interp {
         if(tokens.size()>=2 && input_line.length()>0) {
             lex::Token_type num = tokens[0].getTokenType();
             if(num != lex::TOKEN_DIGIT) {
-                stream << "Requires line number before code.<br>";
+                stream << "Requires line number before code.\r\n";
                 return;
             }
             int value = atoi(tokens[0].getToken().c_str());
@@ -81,7 +81,7 @@ namespace interp {
             TextLine in(value, codetext);
             insertText(tokens, in);
         } else {
-            stream << "Error invalid input.<br>";
+            stream << "Error invalid input.\r\n";
             return;
         }
     }
@@ -90,7 +90,7 @@ namespace interp {
     // will do for translating
     bool checkInstruction(std::vector<lex::Token> &tokens, const TextLine &text) {
         if(tokens.size()<= 1) {
-            stream << "Error: Statement requires instruction.<br>";
+            stream << "Error: Statement requires instruction.\r\n";
             return false;
         }
         static unsigned int inc_offset = 0;
@@ -98,13 +98,13 @@ namespace interp {
             icode::opc op = icode::strtoInc(tokens[1].getToken());
             if(op == icode::opc::NOTINC) {
                 if(tokens[1].getTokenType() != lex::TOKEN_CHAR) {
-                    stream << "Syntax Error: After line number requires either Label or instruction.<br>";
+                    stream << "Syntax Error: After line number requires either Label or instruction.\r\n";
                     return false;
                 }
                 inc_offset = 1;
                 op = icode::strtoInc(tokens[1+inc_offset].getToken());
                 if(op == icode::opc::NOTINC) {
-                    stream << "Syntax Error: After Label requires Instruction.<br>";
+                    stream << "Syntax Error: After Label requires Instruction.\r\n";
                     return false;
                 }
             } else {
@@ -114,11 +114,11 @@ namespace interp {
                         if(tokens.size()>=4+inc_offset) {
                             if(tokens[3+inc_offset].getTokenType() == lex::TOKEN_DIGIT) {}
                             else if(tokens[3+inc_offset].getTokenType() != lex::TOKEN_DIGIT && tokens[3+inc_offset].getTokenType() != lex::TOKEN_HEX) {
-                                stream << "Syntax Error: requires either digit or $.<br>";
+                                stream << "Syntax Error: requires either digit or $.\r\n";
                                 return false;
                                 
                             } else if(tokens[3+inc_offset].getTokenType() != lex::TOKEN_HEX) {
-                                stream << "Syntax Error: $ is followed by a Hex value<br>";
+                                stream << "Syntax Error: $ is followed by a Hex value\r\n";
                                 return false;
                             }
                             
@@ -127,12 +127,12 @@ namespace interp {
                                     // check if register
                                 }
                             } else if(tokens.size()>=5+inc_offset && tokens[4+inc_offset].getToken() != ",") {
-                                stream << "Syntax Error: Expecting comma instead I found: " << tokens[4].getToken() << "<br>";
+                                stream << "Syntax Error: Expecting comma instead I found: " << tokens[4].getToken() << "\r\n";
                                 return false;
                             }
                             
                         } else {
-                            stream << "Syntax Error: Missing value after #<br>";
+                            stream << "Syntax Error: Missing value after #\r\n";
                             return false;
                         }
                     }
@@ -157,11 +157,11 @@ namespace interp {
             
         }
         // for now output each token
-        stream << "Code Line: ["<<text.index <<"] - [" << text.text << "] = {<br>";
+        stream << "Code Line: ["<<text.index <<"] - [" << text.text << "] = {\r\n";
         for(unsigned int i = 0; i < tokens.size(); ++i) {
-            stream << tokens[i] << "<br>";
+            stream << tokens[i] << "\r\n";
         }
-        stream << "}<br><br>";
+        stream << "}\r\n\r\n";
         return true;
     }
 }

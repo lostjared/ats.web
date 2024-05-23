@@ -38,18 +38,18 @@ namespace token {
             std::string value = tokens[1].getToken();
             auto val = function_map.find(value);
             if(val == function_map.end()) {
-                stream << "Error: requires valid command to look up.<br>";
+                stream << "Error: requires valid command to look up.\r\n";
                 return;
             }
             std::string textValue = val->second.help_text;
-            stream << "Description: " << textValue << "<br><br>";
+            stream << "Description: " << textValue << "\r\n\r\n";
         } else if(tokens.size()==1) {
-            stream << "Command list:<br><br>quit<br>description: quit application<br><br>";
+            stream << "Command list:\r\n\r\nquit\r\ndescription: quit application\r\n\r\n";
         	for(auto i = names.begin(); i != names.end(); ++i) {
-            	stream << i->name  << "<br>" "Description: " <<  i->cmd.help_text << "<br><br>";
+            	stream << i->name  << "\r\n" "Description: " <<  i->cmd.help_text << "\r\n\r\n";
         	}
         } else {
-            stream << "Error: requires zero or one argument of command to look up.<br>";
+            stream << "Error: requires zero or one argument of command to look up.\r\n";
             return;
         }
     }

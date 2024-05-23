@@ -21,14 +21,14 @@ namespace translate {
             if(i.op1.op_t == icode::op_type::OP_LABELTEXT) {
                 auto valid = interp::label_table.find(i.op1.label_text);
                 if(valid == interp::label_table.end()) {
-                    stream << "Error could not find label: " << i.op1.label_text << "<br>";
+                    stream << "Error could not find label: " << i.op1.label_text << "\r\n";
                     return false;
                 }
                 i.op1.label_index = valid->second;
             } if(i.op1.op_t == icode::op_type::OP_LABEL) {
                 auto valid = interp::label_line_table.find(i.op1.op);
                 if(valid == interp::label_line_table.end()) {
-                    stream << "Error line number: " << i.op1.op << " does not exisit.<br>";
+                    stream << "Error line number: " << i.op1.op << " does not exisit.\r\n";
                     return false;
                 }
                 i.op1.label_index = valid->second;
@@ -40,7 +40,7 @@ namespace translate {
     bool build_code() {
         try {
             if(interp::lines.size()==0) {
-                stream << "Error: No code to build...<br>";
+                stream << "Error: No code to build...\r\n";
                 return false;
             }
             
@@ -51,7 +51,7 @@ namespace translate {
             
             for(unsigned int i = 0; i < interp::lines.size(); ++i) {
                 if(build_line(i)==false) {
-                    stream << "Error on line: " << interp::lines[i].index << "<br>";
+                    stream << "Error on line: " << interp::lines[i].index << "\r\n";
                     return false;
                 }
             }
@@ -89,7 +89,7 @@ namespace translate {
             op_code = icode::strtoInc(tokens[1].getToken());
             if(op_code == icode::opc::NOTINC) {
                 std::ostringstream stream;
-                stream << "Error: Line: " << line_value << "Expected instruction instead found: " << tokens[1].getToken() << "<br>";
+                stream << "Error: Line: " << line_value << "Expected instruction instead found: " << tokens[1].getToken() << "\r\n";
                 throw cExcep(stream.str());
                 
             } else {
@@ -110,7 +110,7 @@ namespace translate {
             case 0: {
                 if(confirm_mode(inst.opcode, interp::IMPLIED, inst.op_byte)==false) {
                     std::ostringstream stream;
-                    stream << "Error on Line: " << line_value << " instruction " << icode::op_array[static_cast<unsigned int>(inst.opcode)] << " not valid in implied address mode.<br>";
+                    stream << "Error on Line: " << line_value << " instruction " << icode::op_array[static_cast<unsigned int>(inst.opcode)] << " not valid in implied address mode.\r\n";
                     throw cExcep(stream.str());
                 }
                 inst.mode = interp::IMPLIED;
@@ -125,7 +125,7 @@ namespace translate {
                                 inst.mode = interp::ABSOULTE;
                             } else {
                                 std::ostringstream stream;
-                                stream << "Error on Line: " << line_value << " instruction " << inst.opcode << " not supported in relative addressing mode.<br>";
+                                stream << "Error on Line: " << line_value << " instruction " << inst.opcode << " not supported in relative addressing mode.\r\n";
                                 throw cExcep(stream.str());
                             }
                         } else
@@ -137,7 +137,7 @@ namespace translate {
                     case lex::TOKEN_HEX: {
                         if(confirm_mode(inst.opcode, interp::ABSOULTE, inst.op_byte) == false) {
                             std::ostringstream stream;
-                            stream << "Error on Line: " << line_value << " " << inst.opcode << " not supported in absoulte addressing mode.<br>";
+                            stream << "Error on Line: " << line_value << " " << inst.opcode << " not supported in absoulte addressing mode.\r\n";
                             throw cExcep(stream.str());
                         }
                         unsigned int hex_address = icode::toHex(tokens[1].getToken());
@@ -168,7 +168,7 @@ namespace translate {
                               
                                 
                                 std::ostringstream stream;
-                                stream << "Error on Line: " << line_value << " instruction " << inst.opcode << " does not support addressing mode.<br>";
+                                stream << "Error on Line: " << line_value << " instruction " << inst.opcode << " does not support addressing mode.\r\n";
                             }
                         } else {
                             inst.mode = interp::ABSOULTE;
@@ -196,19 +196,19 @@ namespace translate {
                                 numeric_value = icode::toHex(tokens[2].getToken());
                             } else {
                                 std::ostringstream stream;
-                                stream << "Error on Line: " << line_value << " Deicmal or Hex value expected..<br>";
+                                stream << "Error on Line: " << line_value << " Deicmal or Hex value expected..\r\n";
                                 throw cExcep(stream.str());
                             }
                             
                             if(confirm_mode(inst.opcode, interp::IMMEDIATE, inst.op_byte) == false) {
                                 std::ostringstream stream;
-                                stream << "Error on Line: " << line_value << " instruction " << inst.opcode << " not supported in immediate addressing mode.<br>";
+                                stream << "Error on Line: " << line_value << " instruction " << inst.opcode << " not supported in immediate addressing mode.\r\n";
                                 throw cExcep(stream.str());
                             }
                             
                             if(numeric_value > 255) {
                                 std::ostringstream stream;
-                                stream << "Error on Line: " << line_value << " operand is a single byte (no greater than 255).<br>";
+                                stream << "Error on Line: " << line_value << " operand is a single byte (no greater than 255).\r\n";
                                 throw cExcep(stream.str());
                             }
                             
@@ -217,7 +217,7 @@ namespace translate {
                             
                         } else {
                             std::ostringstream stream;
-                            stream << "Error on Line: " << line_value << " Expected # operator..<br>";
+                            stream << "Error on Line: " << line_value << " Expected # operator..\r\n";
                             throw cExcep(stream.str());
                         }
                     }
@@ -242,7 +242,7 @@ namespace translate {
                                     inst.mode = interp::ZEROPAGE_X;
                                 } else {
                                     std::ostringstream stream;
-                                    stream << "Error on Line: " << line_value << " instruction " << inst.opcode << " has X register but not supported in absoulte X address mode.<br>";
+                                    stream << "Error on Line: " << line_value << " instruction " << inst.opcode << " has X register but not supported in absoulte X address mode.\r\n";
                                     throw cExcep(stream.str());
                                 }
                             }
@@ -258,7 +258,7 @@ namespace translate {
                                     inst.mode = interp::ZEROPAGE_Y;
                                 } else {
                                     std::ostringstream stream;
-                                    stream << "Error on Line: " << line_value << " instruction " << inst.opcode << " has Y register but not supported in absoulte y address mode.<br>";
+                                    stream << "Error on Line: " << line_value << " instruction " << inst.opcode << " has Y register but not supported in absoulte y address mode.\r\n";
                                     throw cExcep(stream.str());
                                 }
                             }
@@ -275,7 +275,7 @@ namespace translate {
                     default: {
                         
                         std::ostringstream stream;
-                        stream << "Error on Line: " << line_value << " instruction " << inst.opcode << " requires address value.<br>";
+                        stream << "Error on Line: " << line_value << " instruction " << inst.opcode << " requires address value.\r\n";
                         throw cExcep(stream.str());
                         
                     }
@@ -285,10 +285,10 @@ namespace translate {
             }
                 break;
             case 4:
-                stream << "4: " << tokens[4] << "<br>";
+                stream << "4: " << tokens[4] << "\r\n";
                 break;
             default:
-                stream << "Default: " << tok_size << "<br>";
+                stream << "Default: " << tok_size << "\r\n";
                 break;
         }
         
@@ -310,7 +310,7 @@ namespace translate {
     void match(const lex::Token &token, const lex::Token_type &type) {
         if(token.getTokenType() != type) {
             std::ostringstream stream;
-            stream << "Expected Type: " << type << "<br>";
+            stream << "Expected Type: " << type << "\r\n";
             throw cExcep(stream.str());
         }
     }
@@ -318,7 +318,7 @@ namespace translate {
     void match(const lex::Token &token, const std::string &text) {
         if(token.getToken() != text){
             std::ostringstream stream;
-            stream << "Expected: " << text << " found: " << token.getToken() << "<br>";
+            stream << "Expected: " << text << " found: " << token.getToken() << "\r\n";
             throw cExcep (stream.str());
         }
     }

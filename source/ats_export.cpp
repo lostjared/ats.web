@@ -23,7 +23,7 @@ public:
                 if(s.getTokenType() != lex::TOKEN_EOF)
                 	v.push_back(s);
             }
-            if(v.size()==0) return "No instructions.<br>";
+            if(v.size()==0) return "No instructions.\n";
 
             std::string first_token;
             first_token = icode::lcase(v[0].getToken());
@@ -40,7 +40,7 @@ public:
             int token_count = v.size()-1;
             if((rt->second.greater == false && token_count == rt->second.args) || (rt->second.args == -1) || (rt->second.greater == true && token_count >= rt->second.args)) rt->second.func(input_line, v);
             else {
-                stream << "Error: " << first_token << " requires: " << rt->second.args << " arguments. You gave " << token_count << "<br>";
+                stream << "Error: " << first_token << " requires: " << rt->second.args << " arguments. You gave " << token_count << "\n";
             }
             return stream.str();
     }

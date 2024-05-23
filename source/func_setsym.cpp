@@ -3,7 +3,7 @@
 namespace token {
     void token_SetSym(const std::string &command, std::vector<lex::Token> &tokens) {
         if(tokens[1].getTokenType() != lex::TOKEN_CHAR) {
-            stream << "Error: Command requires variable name.<br>";
+            stream << "Error: Command requires variable name.\r\n";
             return;
         }
         std::string var_name = tokens[1].getToken();
@@ -13,13 +13,13 @@ namespace token {
         std::string var_value = tokens[2].getToken();
         
         if(!(tokens[2].getTokenType() == lex::TOKEN_OPERATOR && var_value == "-") && tokens.size()>=4) {
-            stream << "Error: Requires two arguments: var value..<br>";
+            stream << "Error: Requires two arguments: var value..\r\n";
             return;
         }
         switch(tokens[2].getTokenType()) {
             case lex::TOKEN_CHAR:
                 if(!code.symbols.exisits(tokens[2].getToken())) {
-                    stream << "Error: " << tokens[2].getToken() << " not found!<br>";
+                    stream << "Error: " << tokens[2].getToken() << " not found!\r\n";
                     return;
                 }
                 code.symbols[var_name].setValue(code.symbols[var_value].getValue());
@@ -40,7 +40,7 @@ namespace token {
                     return;
                 }
             default:
-                stream << "Error: requires variable/digit/string.<br>";
+                stream << "Error: requires variable/digit/string.\r\n";
                 return;
         }
     }

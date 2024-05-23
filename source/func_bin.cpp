@@ -22,12 +22,12 @@ namespace token {
     void token_Bin(const std::string &cmd, std::vector<lex::Token> &tokens) {
         if(tokens.size() <= 1) return;
         if(tokens[1].getTokenType() != lex::TOKEN_DIGIT) {
-            stream << "Error: command requires bit depth first!<br>";
+            stream << "Error: command requires bit depth first!\r\n";
             return;
         }
         unsigned int numeric = atoi(tokens[1].getToken().c_str());
         if( (numeric != 8) && (numeric != 16) && (numeric != 32)) {
-            stream << "Error: Supported bit depths are 8, 16, and 32.<br>";
+            stream << "Error: Supported bit depths are 8, 16, and 32.\r\n";
             return;
         }
         for(unsigned int i = 2; i < tokens.size(); ++i) {
@@ -36,14 +36,14 @@ namespace token {
                     unsigned int num = atoi(tokens[i].getToken().c_str());
                     stream << std::dec << std::setfill('0') << std::setw(8) << num << " = " << std::setfill('0') << std::setw(numeric);
                     output_bin(tokens[1].getToken(), num);
-                    stream << "<br>";
+                    stream << "\r\n";
                 }
                     break;
                 case lex::TOKEN_HEX: {
                     unsigned int num = icode::toHex(tokens[i].getToken());
                     stream << std::dec << std::setfill('0') << std::setw(8) << num << " = " << std::setfill('0') << std::setw(numeric);
                     output_bin(tokens[1].getToken(), num);
-                    stream << "<br>";
+                    stream << "\r\n";
                 }
                     break;
                 case lex::TOKEN_CHAR: {
@@ -53,9 +53,9 @@ namespace token {
                         num = static_cast<unsigned int>(code.symbols[tok].get_double());
                         stream << std::dec << std::setfill('0') << std::setw(8) << num << " = " << std::setfill('0') << std::setw(numeric);
                         output_bin(tokens[1].getToken(), num);
-                        stream << "<br>";
+                        stream << "\r\n";
                     } else {
-                        stream << "Error: variable: " << tok << " does not exisit!<br>";
+                        stream << "Error: variable: " << tok << " does not exisit!\r\n";
                         return;
                     }
                 }

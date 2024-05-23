@@ -5,7 +5,7 @@ namespace token {
         code.clear();
         for(unsigned int i = 0; i < interp::lines.size(); ++i) {
             if(procLine(interp::lines[i], code) == false)
-                stream << "Line: " << std::dec << interp::lines[i].index << " contains errors.<br>";
+                stream << "Line: " << std::dec << interp::lines[i].index << " contains errors.\r\n";
         }
     }
 }

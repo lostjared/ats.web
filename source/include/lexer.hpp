@@ -299,7 +299,7 @@ namespace lex {
                     
                     break;
                 case TOKEN_NOTHING:
-                    stream << "Warning unrecognized character: " << c << "<br>";
+                    stream << "Warning unrecognized character: " << c << "\r\n";
                     return GetToken();
                     break;
                 default:
@@ -344,7 +344,7 @@ namespace lex {
                     if(characterToType(cc) != TOKEN_DIGIT && !(toupper(cc) >= 'A' && toupper(cc) <= 'F')) {
                         std::string ch;
                         ch += cc;
-                        throw Scanner_Error(std::string("Scanner Error:  Token [") + tok + std::string("] contains Invalid Hex value: ") +ch+ std::string("<br>"));
+                        throw Scanner_Error(std::string("Scanner Error:  Token [") + tok + std::string("] contains Invalid Hex value: ") +ch+ std::string("\r\n"));
                     }
                     tok += cc;
                     cc = getChar();
@@ -364,7 +364,7 @@ namespace lex {
                 }
                 if(characterToType(cc) !=  TOKEN_CHAR)
                     putBack(cc);
-                if(trunc == true) stream << tok << " truncated.<br>";
+                if(trunc == true) stream << tok << " truncated.\r\n";
                 token.setToken(tok, TOKEN_DIGIT, soffset, sline);
             }
         }
@@ -458,12 +458,12 @@ namespace lex {
             Token t;
             while(input.valid()) {
                 t = input.GetToken();
-                stream << t << "<br>";
+                stream << t << "\r\n";
             }
         }
         
         void err(std::string s) {
-            stream << s << "<br>";
+            stream << s << "\r\n";
             throw Scanner_Error();
         }
 

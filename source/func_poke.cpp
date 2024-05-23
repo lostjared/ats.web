@@ -6,7 +6,7 @@ namespace token {
     void token_Poke(const std::string &command, std::vector<lex::Token> &tokens) {
         
         if(tokens[1].getTokenType() != lex::TOKEN_HEX) {
-            stream << "Error: command requires hex value as first argument<br>";
+            stream << "Error: command requires hex value as first argument\r\n";
             return;
         }
         
@@ -16,7 +16,7 @@ namespace token {
         
         if(tokens[2].getTokenType() == lex::TOKEN_CHAR) {
             if(!code.symbols.exisits(var_value)) {
-                stream << "Error: variable doesn't exisit.<br>";
+                stream << "Error: variable doesn't exisit.\r\n";
                 return;
             }
             
@@ -24,21 +24,21 @@ namespace token {
             var_set = true;
         }
         else if(tokens[2].getTokenType() != lex::TOKEN_HEX) {
-            stream << "Error: command requires hex value as second argument<br>";
+            stream << "Error: command requires hex value as second argument\r\n";
             return;
         }
         
         val1 = icode::toHex(tokens[1].getToken());
         
         if(val1 > 0xFFFF) {
-            stream << "Error: First argument must be 16 bit value<br>";
+            stream << "Error: First argument must be 16 bit value\r\n";
             return;
         }
         
         if(var_set == false) val2 = icode::toHex(tokens[2].getToken());
         
         if(val2 > 0xFF) {
-            stream << "Error: second argument must be 8 bit value<br>";
+            stream << "Error: second argument must be 8 bit value\r\n";
             return;
         }
         

@@ -154,9 +154,9 @@ namespace interp {
         for(unsigned int i = 0; icode::op_array[i] != 0; ++i) {
             icode::opc c = static_cast<icode::opc>(i);
             if(inst[i].opcode == c) {
-                stream << icode::op_array[i] << " correct.<br>";
+                stream << icode::op_array[i] << " correct.\r\n";
             } else {
-                stream << icode::op_array[i] << " incorrect.<br>";
+                stream << icode::op_array[i] << " incorrect.\r\n";
             }
         }
     }
@@ -200,7 +200,7 @@ namespace interp {
                 if(proc.ip > instruct.size()) {
                     run = false;
                     proc.ip = 0;
-                    stream << "Program end reached without END, use END to terminate your program.<br>";
+                    stream << "Program end reached without END, use END to terminate your program.\r\n";
                      if(!in_stack.empty()) in_stack.erase(in_stack.begin(), in_stack.end());
                     if(!stack.empty()) stack.erase(stack.begin(), stack.end());
                     break;
@@ -212,7 +212,7 @@ namespace interp {
     
     void Code::cont() {
         if(proc.ip == 0) {
-            stream << "You must run your program first with execute.<br>";
+            stream << "You must run your program first with execute.\r\n";
             return;
         }
         run = true;
@@ -228,7 +228,7 @@ namespace interp {
                 procInstruct(instruct[proc.ip++]);
             }
         } else {
-            stream << "Program finished executing..<br>";
+            stream << "Program finished executing..\r\n";
             run = false;
             proc.ip = 0;
         }
@@ -264,7 +264,7 @@ namespace interp {
         stream << "{ ";
         proc.printRegisters();
         proc.printFlags();
-        stream << "}<br>";
+        stream << "}\r\n";
     }
     
     void Code::procInstruct(icode::Instruction &i) {

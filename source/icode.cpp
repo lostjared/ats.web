@@ -151,7 +151,7 @@ namespace icode {
         
         
         if(i.mode <= 0 ||i.mode > interp::INDIRECT) {
-            out << "address mode unknown value: " << i.mode << "..<br>";
+            out << "address mode unknown value: " << i.mode << "..\r\n";
             return out;
         }
         out << "Line: " << std::dec << i.line_num << " [" << i.instruction_text << "] - Address Mode: " << interp::add_mode[i.mode] << "  Opcode: " << std::setfill('0') << std::setw(2) << std::hex << std::uppercase << static_cast<unsigned int>(i.op_byte) << " ";
@@ -187,7 +187,7 @@ namespace icode {
                 
                 auto it = interp::label_table.find(i.op1.label_text);
                 if(it == interp::label_table.end()) {
-                    stream << "Error: Could not find label.<br>";
+                    stream << "Error: Could not find label.\r\n";
                     code.stop();
                 } else {
                 	//out << "Branch Label: " << i.op1.label_text << " "; // calculate label
@@ -200,7 +200,7 @@ namespace icode {
                 break;
         }
         // output operand 2
-        stream << "<br>Hex for Machine code: " << stream.str() << "<br>";
+        stream << "\r\nHex for Machine code: " << stream.str() << "\r\n";
         
         return out;
     }

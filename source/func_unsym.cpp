@@ -6,10 +6,10 @@ namespace token {
             if(code.symbols.exisits(tokens[1].getToken())) {
                 code.symbols.remove(tokens[1].getToken());
             } else {
-                stream << "Symbol: " << tokens[1].getToken() << " does not exisit<br>";
+                stream << "Symbol: " << tokens[1].getToken() << " does not exisit\r\n";
             }
         } else {
-            stream << "unsym requires one argument, symbol to remove<br>";
+            stream << "unsym requires one argument, symbol to remove\r\n";
         }
     }
 }

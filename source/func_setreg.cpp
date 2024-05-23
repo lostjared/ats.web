@@ -11,11 +11,11 @@ namespace token {
         else if(tokens[2].getTokenType() == lex::TOKEN_DIGIT)
             val = atoi(tokens[2].getToken().c_str());
         else {
-            stream << "Error: setreg requires decimal or hex argument.<br>";
+            stream << "Error: setreg requires decimal or hex argument.\r\n";
             return;
         }
         if(val > 255) {
-            stream << "Error: x,y,a,p registers are 8 bits.<br>";
+            stream << "Error: x,y,a,p registers are 8 bits.\r\n";
             return;
         }
         

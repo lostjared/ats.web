@@ -64,10 +64,10 @@ namespace token {
             if(tokens[1].getTokenType() == lex::TOKEN_STRING)
             	rt_value = System(tokens[1].getToken());
             else {
-                stream << "Error: sh requires one string argument in quotes<br>";
+                stream << "Error: sh requires one string argument in quotes\r\n";
                 return;
             }
         }
-        stream << "sh: returns " << rt_value << "<br>";
+        stream << "sh: returns " << rt_value << "\r\n";
     }
 }

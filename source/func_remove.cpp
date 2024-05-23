@@ -3,7 +3,7 @@
 namespace token {
     void token_Remove(const std::string &command, std::vector<lex::Token> &v) {
         if(v[1].getTokenType() != lex::TOKEN_DIGIT) {
-            stream << "remove requires line number.<br>";
+            stream << "remove requires line number.\r\n";
             return;
         }
         std::string index;
@@ -18,9 +18,9 @@ namespace token {
             }
         }
         if(found == true)
-            stream << "Line: " << in << " removed..<br>";
+            stream << "Line: " << in << " removed..\r\n";
         else
-            stream << "Line: " << in << " not found..<br>";
+            stream << "Line: " << in << " not found..\r\n";
         
     }
 }

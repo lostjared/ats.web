@@ -326,7 +326,7 @@ namespace interp {
     
     void i_brk(Code &c) {
         c.stop();
-        stream << "Breakpoint occured<br>";
+        stream << "Breakpoint occured\r\n";
     }
     
     void i_bvc(Code &c) {
@@ -512,7 +512,7 @@ namespace interp {
     
     void i_end(Code &c) {
         c.end();
-        stream << "Program stopped, END reached Program reset<br>";
+        stream << "Program stopped, END reached Program reset\r\n";
     }
     
     void i_eor(Code &c) {
@@ -900,7 +900,7 @@ namespace interp {
     }
     
     void i_nop(Code &c) {
-        stream << "nop<br>";
+        stream << "nop\r\n";
     }
     
     void i_ora(Code &c) {
@@ -1183,7 +1183,7 @@ namespace interp {
     
     void i_rts(Code &c) {
         if(c.in_stack.size()==0) {
-            throw Runtime_E("jsr stack underflow.<br>");
+            throw Runtime_E("jsr stack underflow.\r\n");
         }
         int top = c.in_stack.back();
         c.in_stack.pop_back();

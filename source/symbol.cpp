@@ -51,7 +51,7 @@ namespace symbol {
         }
         std::sort(var_.begin(), var_.end());
         for(int z = 0; z < var_.size(); ++z) {
-            stream << *var_[z] << "<br>";
+            stream << *var_[z] << "\r\n";
         }
     }
     

@@ -18,7 +18,7 @@ namespace symbol {
     Variable::~Variable() {
         free();
 #ifdef DEBUG_MODE
-        stream << "destructor -> " << name << "<br>";
+        stream << "destructor -> " << name << "\r\n";
 #endif
     }
     
@@ -102,7 +102,7 @@ namespace symbol {
             for(unsigned int i = 0; i < v.arraySize(); ++i) {
                 
                 if(ohex == false || v.get_double(i) < 0)
-                	out << v.name << "[" << i << "] = { \"" << v.get_text(i) << "\" : " << v.get_double(i) << " }<br>";
+                	out << v.name << "[" << i << "] = { \"" << v.get_text(i) << "\" : " << v.get_double(i) << " }\r\n";
                 else
                     out << v.name << " = { \"" << v.get_text() << "\" : $" << std::uppercase << std::hex << static_cast<int>(v.get_double(i)) << " } ";
             }
